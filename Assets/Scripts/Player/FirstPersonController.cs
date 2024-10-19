@@ -13,6 +13,7 @@ public class FirstPersonController:MonoBehaviour
     [Header("Controls")]
     [SerializeField] private KeyCode sprintKey = KeyCode.LeftShift;
     [SerializeField] private KeyCode jumpKey = KeyCode.Space;
+    [SerializeField] private KeyCode crouchKey = KeyCode.LeftControl;
 
 
     [Header("Movement Parameters")]
@@ -29,6 +30,15 @@ public class FirstPersonController:MonoBehaviour
     [Header("Jumping Parameters")]
     [SerializeField] private float jumpForce = 8.0f;
     [SerializeField] private float gravity = 30.0f;
+
+    [Header("Crouch Parameters")]
+    [SerializeField] private float crouchHeight = 0.5f;
+    [SerializeField] private float standingHeight = 2f;
+    [SerializeField] private float timeToCrouch = 0.25f;
+    [SerializeField] private Vector3 crouchingCenter = new Vector3(0,0.5f,0);
+    [SerializeField] private Vector3 standingCenter = new Vector3(0, 0, 0);
+    private bool isCrouching;
+    private bool duringCrouchAnimation; 
 
 
     private Camera playerCamera;
