@@ -480,8 +480,8 @@ Transform:
   m_GameObject: {fileID: 1552705249}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.074568, y: -1.03, z: 1.3512288}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -3.0746, y: -1.03, z: 1.3512288}
+  m_LocalScale: {x: 10.873, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -560,6 +560,7 @@ MonoBehaviour:
   canSprint: 1
   canJump: 1
   canCrounch: 1
+  canUseHeadbob: 1
   sprintKey: 304
   jumpKey: 32
   crouchKey: 306
@@ -577,6 +578,12 @@ MonoBehaviour:
   timeToCrouch: 0.25
   crouchingCenter: {x: 0, y: 0.5, z: 0}
   standingCenter: {x: 0, y: 0, z: 0}
+  walkBobSpeed: 14
+  walkBobAmount: 0.05
+  sprintBobSpeed: 18
+  sprintBobAmount: 0.11
+  crouchBobSpeed: 8
+  crouchBobAmount: 0.05
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
