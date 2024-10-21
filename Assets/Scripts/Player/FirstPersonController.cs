@@ -16,6 +16,7 @@ public class FirstPersonController:MonoBehaviour
     [SerializeField] private bool willSlideOnSlopes = true;
     [SerializeField] private bool canZoom = true;
     [SerializeField] private bool canInteract = true;
+    [SerializeField] private bool useFootsteps = true;
 
     [Header("Controls")]
     [SerializeField] private KeyCode sprintKey = KeyCode.LeftShift;
@@ -66,6 +67,18 @@ public class FirstPersonController:MonoBehaviour
     [SerializeField] private float zoomFOV = 30f;
     private float defaultFOV;
     private Coroutine zoomRoutine;
+
+    [Header("Footstep Parameters")]
+    [SerializeField] private float baseStepSpeed = 0.5f;
+    [SerializeField] private float crouchStepMultipler = 1.5f;
+    [SerializeField] private float sprintStepMultipler = 0.6f;
+    [SerializeField] private AudioSource foodstepAudioSource = default;
+    [SerializeField] private AudioClip[] woodClips = default;
+    [SerializeField] private AudioClip[] metalClips = default;
+    [SerializeField] private AudioClip[] grassClips = default;
+    private float footstepTimer = 0;
+    private float GetCurrentOffset => isCrouching ? baseStepSpeed * crouchStepMultipler : IsSprinting ? baseStepSpeed * sprintStepMultipler : baseStepSpeed;
+
 
     //SLIDING PARAMETERS
 
@@ -129,6 +142,9 @@ public class FirstPersonController:MonoBehaviour
 
             if (canZoom)
                 HandleZoom();
+
+            if (useFootsteps)
+                HandleFootsteps();
 
             if (canInteract)
             {
@@ -251,6 +267,38 @@ public class FirstPersonController:MonoBehaviour
             moveDirection.y = 0;
 
         characterController.Move(moveDirection * Time.deltaTime);
+    }
+
+    private void HandleFootsteps()
+    {
+        if (!characterController.isGrounded) return;
+        if (currentInput == Vector2.zero) return;
+
+        footstepTimer -= Time.deltaTime;
+
+        if(footstepTimer <= 0)
+        {
+            if(Physics.Raycast(playerCamera.transform.position, Vector3.down, out RaycastHit hit, 3f))
+            {
+                switch (hit.collider.tag)
+                {
+                    case "Footsteps/GRASS":
+                        foodstepAudioSource.PlayOneShot(grassClips[Random.Range(0, grassClips.Length - 1)]);
+                        break;
+                    case "Footsteps/WOOD":
+                        foodstepAudioSource.PlayOneShot(woodClips[Random.Range(0, woodClips.Length - 1)]);
+                        break;
+                    case "Footsteps/STEEL":
+                        foodstepAudioSource.PlayOneShot(metalClips[Random.Range(0, metalClips.Length - 1)]);
+                        break;
+                    default:
+                        foodstepAudioSource.PlayOneShot(grassClips[Random.Range(0, grassClips.Length - 1)]);
+                        break; 
+                }
+            }
+
+            footstepTimer = GetCurrentOffset;
+        }
     }
 
     private IEnumerator CrouchStand()
