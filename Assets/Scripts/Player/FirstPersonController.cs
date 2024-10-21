@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FirstPersonController:MonoBehaviour
@@ -38,6 +40,17 @@ public class FirstPersonController:MonoBehaviour
     [SerializeField, Range(1, 10)] private float lookSpeedY = 2.0f;
     [SerializeField, Range(1, 180)] private float upperLookLimit = 80.0f;
     [SerializeField, Range(1, 180)] private float lowerLookLimit = 80.0f;
+
+    [Header("Health Parameters")]
+    [SerializeField] private float maxHealth = 100f;
+    [SerializeField] private float timeBeforeRegenStarts = 3f;
+    [SerializeField] private float healthValueIncrement = 1f;
+    [SerializeField] private float healthTimeIncrement = 0.1f;
+    private float currentHealth;
+    private Coroutine regeneratingHealth;
+    public static Action<float> OnTakeDamage;
+    public static Action<float> OnDamage;
+    public static Action<float> OnHeal;
 
     [Header("Jumping Parameters")]
     [SerializeField] private float jumpForce = 8.0f;
@@ -114,12 +127,24 @@ public class FirstPersonController:MonoBehaviour
 
     private float rotationX = 0;
 
+
+    private void OnEnable()
+    {
+        OnTakeDamage += ApplyDamage;
+    }
+
+    private void OnDisable()
+    {
+        OnTakeDamage -= ApplyDamage;
+    }
+
     void Awake()
     {
         playerCamera = GetComponentInChildren<Camera>();
         characterController = GetComponent<CharacterController>();
         defaultYPos = playerCamera.transform.localPosition.y;
         defaultFOV = playerCamera.fieldOfView;
+        currentHealth = maxHealth;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -283,22 +308,45 @@ public class FirstPersonController:MonoBehaviour
                 switch (hit.collider.tag)
                 {
                     case "Footsteps/GRASS":
-                        foodstepAudioSource.PlayOneShot(grassClips[Random.Range(0, grassClips.Length - 1)]);
+                        foodstepAudioSource.PlayOneShot(grassClips[UnityEngine.Random.Range(0, grassClips.Length - 1)]);
                         break;
                     case "Footsteps/WOOD":
-                        foodstepAudioSource.PlayOneShot(woodClips[Random.Range(0, woodClips.Length - 1)]);
+                        foodstepAudioSource.PlayOneShot(woodClips[UnityEngine.Random.Range(0, woodClips.Length - 1)]);
                         break;
                     case "Footsteps/STEEL":
-                        foodstepAudioSource.PlayOneShot(metalClips[Random.Range(0, metalClips.Length - 1)]);
+                        foodstepAudioSource.PlayOneShot(metalClips[UnityEngine.Random.Range(0, metalClips.Length - 1)]);
                         break;
                     default:
-                        foodstepAudioSource.PlayOneShot(grassClips[Random.Range(0, grassClips.Length - 1)]);
+                        foodstepAudioSource.PlayOneShot(grassClips[UnityEngine.Random.Range(0, grassClips.Length - 1)]);
                         break; 
                 }
             }
 
             footstepTimer = GetCurrentOffset;
         }
+    }
+
+    private void ApplyDamage(float dmg)
+    {
+        currentHealth -= dmg;
+        OnDamage?.Invoke(currentHealth);
+
+        if (currentHealth <= 0)
+            KillPlayer();
+        else if (regeneratingHealth != null)
+            StopCoroutine(regeneratingHealth);
+
+        regeneratingHealth = StartCoroutine(RegenerateHealth());
+    }
+
+    private void KillPlayer()
+    {
+        currentHealth = 0;
+
+        if (regeneratingHealth != null)
+            StopCoroutine (regeneratingHealth);
+
+        print("DEAD");
     }
 
     private IEnumerator CrouchStand()
@@ -345,6 +393,25 @@ public class FirstPersonController:MonoBehaviour
 
         playerCamera.fieldOfView = targetFOV;
         zoomRoutine = null;
+    }
+
+    private IEnumerator RegenerateHealth()
+    {
+        yield return new WaitForSeconds(timeBeforeRegenStarts);
+        WaitForSeconds timetoWait = new WaitForSeconds(healthTimeIncrement);
+        
+        while(currentHealth < maxHealth)
+        {
+            currentHealth += healthValueIncrement;
+
+            if (currentHealth > maxHealth)
+                currentHealth = maxHealth; 
+
+            OnHeal?.Invoke(currentHealth);
+            yield return timetoWait;
+        }
+
+        regeneratingHealth = null; 
     }
 
 }
