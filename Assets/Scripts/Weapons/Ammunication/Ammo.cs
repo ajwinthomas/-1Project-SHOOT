@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Ammo : MonoBehaviour
@@ -38,6 +39,8 @@ public class Ammo : MonoBehaviour
         AmmoSlot slot = GetAmmoSlot(ammoType);
         slot.ammoCount = slot.initialAmmoCount;
     }
+
+    
 
 
 }

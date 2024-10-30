@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -23,11 +24,15 @@ public class Weapon : MonoBehaviour
     [SerializeField] Ammo ammo;
 
     Camera playerCamera;
+    Animator anim;
+    
     
     void Awake()
     {
         playerCamera = Camera.main;
         shotSound = GetComponent<AudioSource>();
+        anim = GetComponentInParent<Animator>();
+        
     }
     
     void Update()
@@ -40,7 +45,10 @@ public class Weapon : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.R))
-            ammo.ReloadAmmoCount(ammoType);
+        {
+            StartCoroutine(Reload());
+        }
+            
               
     }
 
@@ -72,5 +80,12 @@ public class Weapon : MonoBehaviour
     private void HandleShotSound()
     {
         shotSound.PlayOneShot(shotSound.clip);
+    }
+    private IEnumerator Reload()
+    {
+        anim.SetBool("IsReload", true);
+        yield return new WaitForSeconds(1f);
+        ammo.ReloadAmmoCount(ammoType);
+        anim.SetBool("IsReload", false);
     }
 }
