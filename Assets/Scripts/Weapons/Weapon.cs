@@ -59,7 +59,7 @@ public class Weapon : MonoBehaviour
 
     private void HandleMuzzleFlash()
     {
-       
+            muzzleFlash.Play();
             HandleShotSound(); 
     }
 
