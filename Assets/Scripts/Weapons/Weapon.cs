@@ -18,7 +18,9 @@ public class Weapon : MonoBehaviour
     [Header("Handle Firerate")]
     [SerializeField] float fireRate;
     float thresholdTime;
-
+    [Header("Ammunition")]
+    [SerializeField] AmmoType ammoType;
+    [SerializeField] Ammo ammo;
 
     Camera playerCamera;
     
@@ -30,17 +32,21 @@ public class Weapon : MonoBehaviour
     
     void Update()
     {
+        //HandleFireRate();
 
-        if(Input.GetMouseButtonDown(0) && Time.time >=thresholdTime)
+        if(Input.GetMouseButtonDown(0) && ammo.GetAmmoCount(ammoType) > 0) //canShoot
         {
              Shoot();
-            thresholdTime = Time.time + fireRate;
         }
+
+        if (Input.GetKeyDown(KeyCode.R))
+            ammo.ReloadAmmoCount(ammoType);
               
     }
 
     private void Shoot()
     {
+        ammo.ReduceAmmoCount(ammoType);
          HandleRayCast();
          HandleMuzzleFlash();
     }

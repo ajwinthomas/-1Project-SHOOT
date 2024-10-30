@@ -127,6 +127,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2029394590}
     m_Modifications:
+    - target: {fileID: 2256599082453047479, guid: 76981cf011c7822449fa3ba1e074b917, type: 3}
+      propertyPath: ammo
+      value: 
+      objectReference: {fileID: 2042756339}
+    - target: {fileID: 2256599082453047479, guid: 76981cf011c7822449fa3ba1e074b917, type: 3}
+      propertyPath: ammoType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8491415509201801089, guid: 76981cf011c7822449fa3ba1e074b917, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.19840908
@@ -171,6 +179,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'Assult Rifel 1 '
       objectReference: {fileID: 0}
+    - target: {fileID: 9123239264082400571, guid: 76981cf011c7822449fa3ba1e074b917, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -189,6 +201,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2029394590}
     m_Modifications:
+    - target: {fileID: 2414678988092347374, guid: 2ce45a73a3c3c9c408a26a61b349f40b, type: 3}
+      propertyPath: ammo
+      value: 
+      objectReference: {fileID: 2042756339}
     - target: {fileID: 2733707503699988550, guid: 2ce45a73a3c3c9c408a26a61b349f40b, type: 3}
       propertyPath: m_Name
       value: Pistol 1
@@ -1373,6 +1389,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2029394590}
     m_Modifications:
+    - target: {fileID: 4548438945369584094, guid: 1026b8d41fe11a046827ddb2303d51ad, type: 3}
+      propertyPath: ammo
+      value: 
+      objectReference: {fileID: 2042756339}
+    - target: {fileID: 4548438945369584094, guid: 1026b8d41fe11a046827ddb2303d51ad, type: 3}
+      propertyPath: ammoType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5631403325178734782, guid: 1026b8d41fe11a046827ddb2303d51ad, type: 3}
       propertyPath: hasScope
       value: 1
@@ -1533,6 +1557,7 @@ GameObject:
   - component: {fileID: 2042756336}
   - component: {fileID: 2042756337}
   - component: {fileID: 2042756338}
+  - component: {fileID: 2042756339}
   m_Layer: 0
   m_Name: FirstPersonController
   m_TagString: Player
@@ -1751,6 +1776,31 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2042756339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2042756334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f4dec659ae82cc48a2a2547eb718933, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ammoSlot:
+  - name: Bullets
+    ammoType: 0
+    ammoCount: 6
+    initialAmmoCount: 6
+  - name: Ar Bullets
+    ammoType: 1
+    ammoCount: 25
+    initialAmmoCount: 25
+  - name: Snipe Bullets
+    ammoType: 2
+    ammoCount: 1
+    initialAmmoCount: 1
 --- !u!1001 &3119812167925126887
 PrefabInstance:
   m_ObjectHideFlags: 0
