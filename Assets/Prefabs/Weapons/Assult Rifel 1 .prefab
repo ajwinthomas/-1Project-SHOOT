@@ -110,6 +110,8 @@ MonoBehaviour:
   bulletHolePositionOffset: 0.01
   shotSound: {fileID: 6247921062016839173}
   fireRate: 0.1
+  ammoType: 1
+  ammo: {fileID: 0}
 --- !u!82 &6247921062016839173
 AudioSource:
   m_ObjectHideFlags: 0

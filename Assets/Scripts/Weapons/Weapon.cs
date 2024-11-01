@@ -15,6 +15,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] GameObject bulletHole;
     [SerializeField] float bulletHolePositionOffset;
     [SerializeField] AudioSource shotSound;
+    
 
     [Header("Handle Firerate")]
     [SerializeField] float fireRate;
@@ -25,6 +26,10 @@ public class Weapon : MonoBehaviour
 
     Camera playerCamera;
     Animator anim;
+
+    private bool isReloading = false;
+    
+
     
     
     void Awake()
@@ -44,7 +49,7 @@ public class Weapon : MonoBehaviour
              Shoot();
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) )
         {
             StartCoroutine(Reload());
         }
@@ -87,5 +92,6 @@ public class Weapon : MonoBehaviour
         yield return new WaitForSeconds(1f);
         ammo.ReloadAmmoCount(ammoType);
         anim.SetBool("IsReload", false);
+        
     }
 }

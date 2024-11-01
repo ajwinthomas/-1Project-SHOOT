@@ -131,10 +131,6 @@ PrefabInstance:
       propertyPath: ammo
       value: 
       objectReference: {fileID: 2042756339}
-    - target: {fileID: 2256599082453047479, guid: 76981cf011c7822449fa3ba1e074b917, type: 3}
-      propertyPath: ammoType
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8491415509201801089, guid: 76981cf011c7822449fa3ba1e074b917, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.19840908
@@ -179,10 +175,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'Assult Rifel 1 '
       objectReference: {fileID: 0}
-    - target: {fileID: 9123239264082400571, guid: 76981cf011c7822449fa3ba1e074b917, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -208,10 +200,6 @@ PrefabInstance:
     - target: {fileID: 2733707503699988550, guid: 2ce45a73a3c3c9c408a26a61b349f40b, type: 3}
       propertyPath: m_Name
       value: Pistol 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2733707503699988550, guid: 2ce45a73a3c3c9c408a26a61b349f40b, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3367501549380815612, guid: 2ce45a73a3c3c9c408a26a61b349f40b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1393,14 +1381,6 @@ PrefabInstance:
       propertyPath: ammo
       value: 
       objectReference: {fileID: 2042756339}
-    - target: {fileID: 4548438945369584094, guid: 1026b8d41fe11a046827ddb2303d51ad, type: 3}
-      propertyPath: ammoType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5631403325178734782, guid: 1026b8d41fe11a046827ddb2303d51ad, type: 3}
-      propertyPath: hasScope
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5631403325178734782, guid: 1026b8d41fe11a046827ddb2303d51ad, type: 3}
       propertyPath: scopeImage
       value: 
@@ -1416,14 +1396,6 @@ PrefabInstance:
     - target: {fileID: 8360218140025613808, guid: 1026b8d41fe11a046827ddb2303d51ad, type: 3}
       propertyPath: m_Name
       value: 'Sniper Rifel '
-      objectReference: {fileID: 0}
-    - target: {fileID: 8360218140025613808, guid: 1026b8d41fe11a046827ddb2303d51ad, type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 8360218140025613808, guid: 1026b8d41fe11a046827ddb2303d51ad, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9173452792615974730, guid: 1026b8d41fe11a046827ddb2303d51ad, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1486,6 +1458,7 @@ GameObject:
   - component: {fileID: 2029394590}
   - component: {fileID: 2029394591}
   - component: {fileID: 2029394592}
+  - component: {fileID: 2029394593}
   m_Layer: 11
   m_Name: Weapons
   m_TagString: Untagged
@@ -1523,6 +1496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab0f8cfa513a8234eab02f1cce29c209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reloadSound: {fileID: 2029394593}
 --- !u!95 &2029394592
 Animator:
   serializedVersion: 7
@@ -1545,6 +1519,103 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!82 &2029394593
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029394589}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 5e7f633dda3117f4f90253f51ee065f0, type: 3}
+  m_Resource: {fileID: 8300000, guid: 5e7f633dda3117f4f90253f51ee065f0, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &2042756334
 GameObject:
   m_ObjectHideFlags: 0

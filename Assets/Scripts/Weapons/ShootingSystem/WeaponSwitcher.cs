@@ -9,6 +9,9 @@ public class WeaponSwitcher : MonoBehaviour
     int previousWeaponIndex;
     private WeaponZoom weaponZoom;
 
+    [Header("Reeload animation sound triggering")]
+    [SerializeField] AudioSource reloadSound;
+
     private void Start()
     {
         weaponZoom = GetComponentInChildren<WeaponZoom>();
@@ -69,5 +72,10 @@ public class WeaponSwitcher : MonoBehaviour
         {
             transform.GetChild(i).gameObject.SetActive(i==currentWeaponIndex);
         }
+    }
+
+    public void PlayReloadSound()
+    {
+        reloadSound.PlayOneShot(reloadSound.clip);
     }
 }

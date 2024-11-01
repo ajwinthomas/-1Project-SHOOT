@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9173452792615974730
 Transform:
   m_ObjectHideFlags: 0
@@ -111,6 +111,8 @@ MonoBehaviour:
   bulletHolePositionOffset: 0.01
   shotSound: {fileID: 2394477121771461387}
   fireRate: 1
+  ammoType: 2
+  ammo: {fileID: 0}
 --- !u!82 &2394477121771461387
 AudioSource:
   m_ObjectHideFlags: 0
@@ -220,13 +222,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b18076cee8acb4b418a1b67c2d69e429, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasScope: 0
-  zoomedFOV: 30
-  zoomTime: 5
-  normalFOV: 60
+  hasScope: 1
+  scopeImage: {fileID: 0}
+  weaponCamera: {fileID: 0}
+  isScoping: 0
   postProcessVolume: {fileID: 0}
   normalVignetteIntensity: 0
   zoomedVignetteIntensity: 0.85
+  zoomedFOV: 30
+  zoomTime: 5
+  normalFOV: 60
 --- !u!1001 &2476008591897043135
 PrefabInstance:
   m_ObjectHideFlags: 0
