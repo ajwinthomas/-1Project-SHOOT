@@ -43,7 +43,7 @@ public class EnemyBrain : MonoBehaviour
     private void LookAtTarget()
     {
         Vector3 lookPos = target.position - transform.position;
-        lookPos.y = 1;
+        //lookPos.y = 1;
         Quaternion rotation = Quaternion.LookRotation(lookPos);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 0.2f);
 

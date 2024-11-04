@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class EnemyShooter : MonoBehaviour
 {
@@ -12,6 +13,11 @@ public class EnemyShooter : MonoBehaviour
     public Vector3 spread = new Vector3(0.2f, 0.2f, 0.2f);
     public TrailRenderer bulletTrail;
     private EnemyReferences enemyReferences;
+
+    [Header("Target")]
+    public Transform target;
+
+    [SerializeField] private PlayerHealth playerHealth;
 
     private void Awake()
     {
@@ -39,12 +45,22 @@ public class EnemyShooter : MonoBehaviour
 
             TrailRenderer trail = Instantiate(bulletTrail,gunPoint.position,Quaternion.identity);
             StartCoroutine(SpawnTrail(trail, hit));
+            
+            if (hit.collider.CompareTag("Player"))
+            {
+                  
+                if(playerHealth != null)
+                {
+                    playerHealth.TakeDamage(10f);
+                }
+
+            }
         }
     }
 
     private Vector3 GetDirection()
     {
-        Vector3 direction = transform.forward;
+        Vector3 direction = (target.position - shootPoint.position).normalized;
         direction += new Vector3(Random.Range(-spread.x, spread.x), Random.Range(-spread.y, spread.y), Random.Range(-spread.z, spread.z));
         direction.Normalize();
         return direction;
