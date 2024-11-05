@@ -68,7 +68,24 @@ public class Weapon : MonoBehaviour
     {
         if(Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward,out RaycastHit hit,weaponRange,hittableLayer))
         {
-            Instantiate(bulletHole, hit.point + (hit.normal * bulletHolePositionOffset), Quaternion.LookRotation(hit.normal));
+            if (hit.collider.CompareTag("Enemy"))
+            {
+                EnemyHealth enemyHealth = hit.collider.GetComponentInChildren<EnemyHealth>();
+
+
+                if (enemyHealth != null)
+                {
+                    Debug.Log("Hit enemy, dealing damage.");
+                    enemyHealth.TakeDamage(10f);
+                }
+            }
+            else
+            {
+                Instantiate(bulletHole, hit.point + (hit.normal * bulletHolePositionOffset), Quaternion.LookRotation(hit.normal));
+
+            }
+
+
         }
         else
         {

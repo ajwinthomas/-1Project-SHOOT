@@ -51,7 +51,7 @@ public class EnemyShooter : MonoBehaviour
                   
                 if(playerHealth != null)
                 {
-                    playerHealth.TakeDamage(10f);
+                    playerHealth.TakeDamage(5f);
                 }
 
             }
